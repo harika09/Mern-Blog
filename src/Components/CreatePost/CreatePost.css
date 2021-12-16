@@ -1,0 +1,89 @@
+.create-blog-post-content {
+  padding: 10px;
+
+}
+.post-wrapper-form form {
+  display: flex;
+  flex-direction: column;
+}
+
+form input[type="text"] {
+  border: 1px solid #ccc;
+  padding: 13px;
+}
+
+form input:focus {
+  outline: none;
+}
+
+.fa-image {
+  font-size: 3.5rem;
+  cursor: pointer;
+}
+
+form label {
+  margin: 10px 0;
+}
+
+.post-wrapper-form form textarea {
+  margin: 10px 0;
+  border-radius: 0;
+}
+
+.file-upload input {
+  width: 0;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  display: none;
+}
+.file-upload {
+  width: 0;
+}
+
+.lower-form-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row-reverse;
+}
+
+.category-list-selection {
+  display: flex;
+  flex-direction: column;
+}
+
+.lower-form-wrapper .image-upload{
+  margin-top: 15px;
+}
+
+
+.lower-form-wrapper .image-upload label .fas{
+ text-align: center;
+ display: block;
+}
+
+select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  max-width: 250px;
+  border-radius: none;
+}
+
+select:focus {
+  outline: none;
+}
+
+form input[type="submit"] {
+  margin-top: 20px;
+  cursor: pointer;
+  color: #fff;
+  background-color: #ce236f;
+  max-width: 150px;
+  font-size: 1rem;
+  border-radius: 4px;
+  border: none;
+  padding: 10px;
+}
+
+form input[type="submit"]:hover {
+  opacity: 0.8;
+}

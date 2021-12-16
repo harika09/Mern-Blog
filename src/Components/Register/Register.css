@@ -1,0 +1,56 @@
+.register-form-content {
+  display: flex;
+  flex-direction: column;
+  min-height: 80vh;
+  justify-content: center;
+}
+.form-wrapper {
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  width: 500px;
+  margin-top: 10px;
+  margin: 0 auto;
+}
+
+.form-wrapper label {
+  margin-bottom: 10px;
+}
+
+.form-wrapper h2{
+  text-align: center;
+  font-size: 5rem;
+}
+
+.form-wrapper input[type='text'], input[type='email'], input[type='password'] {
+  padding: 20px;
+  border: 1px solid #ccc;
+  outline: none;
+  margin-bottom: 5px;
+}
+
+.form-wrapper input:active {
+  border: none;
+  outline: none;
+}
+
+.error-message{
+  padding: 12px 5px;
+  background-color: #ce236f;
+  color: #fff;
+}
+
+.form-wrapper .btn-reg {
+  max-width: 100%;
+  margin-top: 10px;
+  background-color: #ce236f;
+  color: #fff;
+  font-size: 1.2rem;
+  border-radius: 4px;
+  padding: 10px;
+  cursor: pointer;
+}
+.form-wrapper img{
+  max-width: 200px;
+  margin: 0 auto;
+}

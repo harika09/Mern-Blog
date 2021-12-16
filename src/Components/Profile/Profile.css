@@ -1,0 +1,37 @@
+.profile-wrapper{
+    margin: 25px 0;
+}
+
+.user-profile{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.user-info{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.user-profile strong{
+    font-size: 1.5rem;
+}
+
+.user-btn-logout button{
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-size: 1.1rem;
+    outline: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.user-profile img{
+    width: 75px;
+    height: 75px;
+    border: 1px solid #ccc;
+    border-radius: 100px;
+}
