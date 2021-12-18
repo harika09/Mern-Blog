@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
-import Axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { HashLoader } from "react-spinners";
+import Swal from "sweetalert2";
+import Axios from "axios";
 import "./CreatePost.css";
 
 function CreatePost() {
@@ -10,9 +12,34 @@ function CreatePost() {
   const [image, setImage] = useState("");
   const [doubleClick, setDoulbeClick] = useState(false)
   const [category, setCategory] = useState("photography");
+  const [pageLoad, setPageLoad] = useState(false)
+
+  
+
+  const errorMesssage = ()=>{
+    Swal.fire({
+      position: "center",
+      icon: "error",
+      title: "Fields cannot be empty",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  }
+
+  const successMessage = () => {
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: "Blog posted",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  };
 
   const createPost = (e) => {
     e.preventDefault();
+    setPageLoad(true)
+  
 
     const formData = new FormData();
 
@@ -21,8 +48,9 @@ function CreatePost() {
     formData.append("content", content);
     formData.append("category", category);
 
-    if (!title.trim() || !content.trim() || !category) {
-      alert("Empty Fields");
+    if (!title.trim() || !content.trim() || !image) {
+      errorMesssage()
+    setPageLoad(false)
     } else {
       setDoulbeClick(true)
       Axios.post("/api/blog/create-blog", formData, {
@@ -32,6 +60,7 @@ function CreatePost() {
         },
       }).then((response)=>{
         if(response.data.success){
+          successMessage()
           navigate('/')
         }
       })
@@ -49,7 +78,9 @@ function CreatePost() {
   return (
     <div className="create-blog-post-container bd-container">
       <div className="create-blog-post-content">
-        <h1>Create Post Here</h1>
+       {pageLoad? (<div className="loading-animation">
+       <HashLoader loading color="#4B5A82" size={75} />
+       </div>):(<div> <h3>Create Blog Here</h3>
 
         <div className="post-wrapper-form">
           <form onSubmit={createPost}>
@@ -111,7 +142,7 @@ function CreatePost() {
             </div>
             <input disabled={doubleClick}  type="submit" value="Submit" />
           </form>
-        </div>
+        </div></div>)}
       </div>
     </div>
   );

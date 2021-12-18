@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import { HashLoader } from "react-spinners";
+import Swal from "sweetalert2";
 import Axios from "axios";
 import moment from "moment";
 import "./Post.css";
@@ -21,6 +22,27 @@ function Post() {
   const [doubleClick, setDoulbeClick] = useState(false)
 
 
+  const successMessage = () => {
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: "Comment posted",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  };
+
+  const errorMessage = (error) => {
+    Swal.fire({
+      position: "center",
+      icon: "error",
+      title: error,
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  };
+
+
   const submitComment = (e) => {
     e.preventDefault();
 
@@ -39,18 +61,17 @@ function Post() {
         }
       ).then((response) => {
         if (response.data.error) {
-          setError(response.data.error);
+          errorMessage(response.data.error)
         } else {
           setComment("");
           setError("");
+          successMessage()
         }
       });
     } else {
       navigate("/login");
     }
   };
-
- 
 
   const like = async (id) =>{
     const requestedID = id

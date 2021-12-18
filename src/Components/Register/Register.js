@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { HashLoader } from "react-spinners";
 import Logo from '../Assets/Images/logo.png'
+import Swal from "sweetalert2";
 import Axios from "axios";
 import "./Register.css";
 
@@ -12,8 +13,28 @@ function Register() {
   const [lastName, setLname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("");
   const [isloading, setLoading] = useState(false)
+
+  const errorMesssage = (message)=>{
+    Swal.fire({
+      position: "center",
+      icon: "error",
+      title: message,
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  }
+
+
+  const successMesssage = (message)=>{
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: message,
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  }
 
 
   const Register = (e) => {
@@ -29,9 +50,10 @@ function Register() {
       password: password,
     }).then((response) => {
       if (response.data.error) {
-        setMessage(response.data.error);
+        errorMesssage(response.data.error)
         setLoading(false)
       } else {
+        successMesssage(response.data.success)
         setLoading(false)
         localStorage.setItem("Token", response.data.token);
         navigate("/");
@@ -57,11 +79,7 @@ function Register() {
           <form className="form-wrapper" onSubmit={Register}>
            <img src={Logo} alt="Logo"></img>
 
-          {message && (
-                 <div className="error">
-                   <p>{message}</p>
-                 </div>
-               )}
+       
           <label htmlFor="email">Email</label>
           <input
             type="email"

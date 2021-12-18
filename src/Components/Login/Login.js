@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { HashLoader } from "react-spinners";
 import Logo from '../Assets/Images/logo.png'
+import Swal from "sweetalert2";
 import Axios from "axios";
 import "./Login.css";
 
@@ -9,8 +10,29 @@ function Login() {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("");
   const [isloading, setLoading] = useState(false)
+
+  const errorMesssage = (message)=>{
+    Swal.fire({
+      position: "center",
+      icon: "error",
+      title: message,
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  }
+
+
+  const successMesssage = (message)=>{
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: message,
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  }
+
 
 
   const Login = (e) => {
@@ -23,11 +45,11 @@ function Login() {
       password: password,
     }).then((response) => {
       if (response.data.error) {
-        setMessage(response.data.error);
+        errorMesssage(response.data.error);
         setLoading(false)
       } else {
         setLoading(false)
-        setMessage(response.data.success);
+        successMesssage(response.data.success);
         navigate("/");
         localStorage.setItem("Token", response.data.token);
         localStorage.setItem('userId', response.data.user._id)
@@ -52,11 +74,7 @@ function Login() {
            <div className="login-form-container">
            <form className="login-form" onSubmit={Login}>
              <img src={Logo} alt="Logo"></img>
-             {message && (
-                 <div className="error">
-                   <p>{message}</p>
-                 </div>
-               )}
+            
              <label htmlFor="username">Username</label>
              <input
                type="text"

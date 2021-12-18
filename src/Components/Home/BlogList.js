@@ -1,7 +1,8 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import Axios from 'axios';
+import Swal from 'sweetalert2';
 import moment from "moment";
+import Axios from 'axios';
 import './Home.css'
 
 function BlogList({data}) {
@@ -10,13 +11,24 @@ function BlogList({data}) {
 
     const removePost = async(id)=>{
         const requestedID = id
-  
-        await Axios.delete(`api/blog/delete/${requestedID}`,{
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + localStorage.getItem("Token"),
-          },
+
+        Swal.fire({
+          title: "Task complete?",
+          icon: "warning",
+          showCancelButton: true,
+          buttonsStyling: false,
+          confirmButtonText: "Yes, delete it!",
+        }).then((result)=>{
+          if(result.isConfirmed){
+            Axios.delete(`api/blog/delete/${requestedID}`,{
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + localStorage.getItem("Token"),
+              },
+            })
+          }
         })
+      
     }
 
     return (
